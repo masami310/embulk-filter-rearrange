@@ -1,0 +1,32 @@
+in:
+  type: file
+  path_prefix: example
+  parser:
+    charset: UTF-8
+    newline: CRLF
+    type: csv
+    delimiter: ','
+    quote: '"'
+    escape: '"'
+    trim_if_not_quoted: false
+    skip_header_lines: 1
+    allow_extra_columns: false
+    allow_optional_columns: false
+    columns:
+    - {name: date, type: timestamp, format: '%Y-%m-%d %H:%M:%S'}
+    - {name: item1, type: string}
+    - {name: value1, type: long}
+    - {name: item2, type: string}
+    - {name: value2, type: long}
+filters:
+  - type: rearrange
+    columns:
+      - {name: date, type: timestamp}
+      - {name: item, type: string}
+      - {name: value, type: long}
+    output_data:
+      - ["date", "item1", "value1"]
+      - ["date", "item2", "value2"]
+    add_row_number: true
+    row_number_column_name: "rownum"
+out: {type: stdout}
