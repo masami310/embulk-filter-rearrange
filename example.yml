@@ -1,6 +1,6 @@
 in:
   type: file
-  path_prefix: example
+  path_prefix: example.csv
   parser:
     charset: UTF-8
     newline: CRLF
